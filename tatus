@@ -1,0 +1,11 @@
+[33mcommit 0a627fd81159dc98b6e9547654b003cd96b89bd3[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Stephany-11 <androomeda11@gmail.com>
+Date:   Tue Apr 21 10:09:54 2026 -0500
+
+    Initial commit: Configuración inicial del proyecto Django - Sistema de Gestión de Solicitudes
+
+[33mcommit cb0b756d4c113c3aafdae561c3a1eddb9aaf98dd[m
+Author: Stephany-11 <androomeda11@gmail.com>
+Date:   Wed Apr 15 21:41:19 2026 -0500
+
+    implementar interfaz de usuario y lógica de creación de solicitudes
