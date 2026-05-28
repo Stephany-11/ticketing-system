@@ -1,48 +1,61 @@
 {% extends 'core/base.html' %}
 
-{% block title %}Iniciar Sesión{% endblock %}
+{% block title %}Iniciar Sesión - Escuela de Artillería{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col-md-6 col-lg-4">
-        <div class="card shadow">
-            <div class="card-header bg-primary text-white text-center">
-                <h4 class="mb-0">🔐 Iniciar Sesión</h4>
+    <div class="col-md-6 col-lg-5">
+        <div class="card card-military">
+            <div class="card-header text-center">
+                <i class="fas fa-shield-alt fa-3x mb-2"></i>
+                <h4 class="mb-0">AUTENTICACIÓN DE USUARIO</h4>
+                <small>Escuela de Artillería Militar</small>
             </div>
             <div class="card-body p-4">
                 <form method="post">
                     {% csrf_token %}
                     
                     <div class="mb-3">
-                        <label for="id_username" class="form-label">Usuario</label>
+                        <label for="id_username" class="form-label">
+                            <i class="fas fa-user"></i> Usuario
+                        </label>
                         <input type="text" name="username" class="form-control" 
-                               id="id_username" required autofocus>
+                               id="id_username" required autofocus
+                               style="border: 2px solid #4B5320; border-radius: 0;">
                     </div>
                     
-                    <div class="mb-3">
-                        <label for="id_password" class="form-label">Contraseña</label>
+                    <div class="mb-4">
+                        <label for="id_password" class="form-label">
+                            <i class="fas fa-lock"></i> Contraseña
+                        </label>
                         <input type="password" name="password" class="form-control" 
-                               id="id_password" required>
+                               id="id_password" required
+                               style="border: 2px solid #4B5320; border-radius: 0;">
                     </div>
                     
-                    <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+                    <button type="submit" class="btn btn-military w-100">
+                        <i class="fas fa-sign-in-alt"></i> INGRESAR AL SISTEMA
+                    </button>
                 </form>
                 
                 {% if form.errors %}
-                <div class="alert alert-danger mt-3 mb-0">
-                    <small>❌ Usuario o contraseña incorrectos</small>
+                <div class="alert alert-danger mt-3 mb-0" style="border: 2px solid #DC143C;">
+                    <i class="fas fa-exclamation-triangle"></i> 
+                    <strong>Acceso Denegado:</strong> Usuario o contraseña incorrectos
                 </div>
                 {% endif %}
             </div>
-            <div class="card-footer text-center bg-light">
-                <small class="text-muted">
-                    ¿Problemas para ingresar? Contacta al área de TI
-                </small>
+            <div class="card-footer text-center" style="background-color: #f8f9fa; border-top: 2px solid #4B5320;">
+                <a href="{% url 'home' %}" class="text-decoration-none" style="color: #4B5320;">
+                    <i class="fas fa-arrow-left"></i> Volver al Inicio
+                </a>
             </div>
         </div>
         
         <div class="text-center mt-3">
-            <a href="{% url 'home' %}" class="text-decoration-none">← Volver al inicio</a>
+            <small class="text-muted">
+                <i class="fas fa-shield-alt"></i> Acceso restringido - Solo personal autorizado
+            </small>
         </div>
     </div>
 </div>

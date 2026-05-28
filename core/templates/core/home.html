@@ -1,62 +1,96 @@
 {% extends 'core/base.html' %}
 
-{% block title %}Inicio - Sistema de Solicitudes{% endblock %}
+{% block title %}Inicio - Escuela de Artillería{% endblock %}
 
 {% block content %}
 <div class="text-center mt-5">
-    <h1 class="display-5 fw-bold">📋 Sistema de Gestión de Solicitudes</h1>
-    <p class="lead text-muted mt-3">Escuela de Artillería Militar de Bogotá</p>
-    <p class="mb-4">Plataforma para el registro y seguimiento de requerimientos internos</p>
+    <!-- ICONO DE SEGURIDAD -->
+    <div class="mb-4">
+        <i class="fas fa-shield-alt" style="font-size: 4rem; color: #4B5320;"></i> 
+    </div>
+    
+    <h1 class="display-4 fw-bold" style="color: #2F3A1A; text-transform: capitalize; letter-spacing: 2px;">
+        SISTEMA DE GESTIÓN DE SOLICITUDES
+    </h1>
+    
+    <p class="lead mt-3 mb-4" style="color: #5C4033;">
+        <i class="fas fa-building"></i> 
+        <strong>ESCUELA DE ARTILLERÍA MILITAR DE BOGOTÁ</strong><br>
+        <span class="small">"ESCUELA DE ARTILLERIA "</span>
+    </p>
+    
+    <div class="alert alert-warning d-inline-block mt-3 mb-4" style="border: 3px solid #4B5320; background-color: #fff;">
+        <i class="fas fa-star"></i> 
+        <strong>"DEBER ANTES QUE VIDA"</strong>
+    </div>
     
     {% if user.is_authenticated %}
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <a href="{% url 'crear_solicitud' %}" class="btn btn-primary btn-lg px-4 gap-3">
-                📝 Crear Nueva Solicitud
-            </a>
-            <a href="{% url 'lista_solicitudes' %}" class="btn btn-outline-secondary btn-lg px-4">
-                📋 Ver Mis Solicitudes
-            </a>
-        </div>
-        <div class="mt-4 p-3 bg-light rounded">
-            <small class="text-muted">
-                👤 Conectado como: <strong>{{ user.username }}</strong>
-            </small>
+        <div class="mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-4 mb-3">
+                    <a href="{% url 'crear_solicitud' %}" class="btn btn-military btn-lg w-100">
+                        <i class="fas fa-plus-circle fa-2x d-block mb-2"></i>
+                        CREAR NUEVA SOLICITUD
+                    </a>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <a href="{% url 'lista_solicitudes' %}" class="btn btn-outline-dark btn-lg w-100" style="border: 2px solid #4B5320;">
+                        <i class="fas fa-list fa-2x d-block mb-2"></i>
+                        CONSULTAR SOLICITUDES
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-4 p-4" style="background-color: #4B5320; color: white; border-radius: 0;">
+                <p class="mb-1"><i class="fas fa-user-shield"></i> <strong>Usuario Conectado:</strong> {{ user.username }}</p>
+                <p class="mb-0 small">Sistema de Gestión - Acceso Autorizado</p>
+            </div>
         </div>
     {% else %}
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <a href="{% url 'login' %}" class="btn btn-primary btn-lg px-4 gap-3">
-                🔐 Iniciar Sesión
-            </a>
-        </div>
-        <div class="mt-4 alert alert-info d-inline-block">
-            <small>Debes iniciar sesión para crear o consultar solicitudes</small>
+        <div class="mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <a href="{% url 'login' %}" class="btn btn-military btn-lg w-50">
+                        <i class="fas fa-sign-in-alt fa-1x d-block mb-1"></i>
+                        INICIAR SESIÓN
+                    </a>
+                </div>
+            </div>
+            
+            <div class="alert alert-info mt-4" style="border: 2px solid #4B5320; background-color: #fff;">
+                <i class="fas fa-info-circle"></i> 
+                <strong>Acceso Restringido:</strong> Solo personal autorizado puede acceder al sistema
+            </div>
         </div>
     {% endif %}
 </div>
 
-<!-- Sección informativa -->
-<div class="row mt-5">
-    <div class="col-md-4">
-        <div class="card h-100">
-            <div class="card-body text-center">
-                <h3 class="card-title">🚀 Rápido</h3>
-                <p class="card-text">Crea solicitudes en menos de 1 minuto con nuestro formulario simplificado.</p>
+<!-- Características -->
+<div class="row mt-5 pt-5">
+    <div class="col-md-4 mb-4">
+        <div class="card card-military h-100 text-center">
+            <div class="card-body">
+                <i class="fas fa-bolt fa-3x mb-3" style="color: #C9B037;"></i>
+                <h5 class="card-title" style="color: #2F3A1A;">EFICIENCIA</h5>
+                <p class="card-text">Gestión rápida y organizada de todas las solicitudes institucionales</p>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card h-100">
-            <div class="card-body text-center">
-                <h3 class="card-title">🔍 Transparente</h3>
-                <p class="card-text">Seguimiento en tiempo real del estado de cada requerimiento.</p>
+    <div class="col-md-4 mb-4">
+        <div class="card card-military h-100 text-center">
+            <div class="card-body">
+                <i class="fas fa-lock fa-3x mb-3" style="color: #C9B037;"></i>
+                <h5 class="card-title" style="color: #2F3A1A;">SEGURIDAD</h5>
+                <p class="card-text">Información protegida con estándares de seguridad militar</p>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card h-100">
-            <div class="card-body text-center">
-                <h3 class="card-title">🔒 Seguro</h3>
-                <p class="card-text">Tus datos están protegidos con estándares de seguridad militar.</p>
+    <div class="col-md-4 mb-4">
+        <div class="card card-military h-100 text-center">
+            <div class="card-body">
+                <i class="fas fa-chart-line fa-3x mb-3" style="color: #C9B037;"></i>
+                <h5 class="card-title" style="color: #2F3A1A;">TRAZABILIDAD</h5>
+                <p class="card-text">Seguimiento completo del estado de cada requerimiento</p>
             </div>
         </div>
     </div>
