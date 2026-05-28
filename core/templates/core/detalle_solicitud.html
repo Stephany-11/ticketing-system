@@ -1,0 +1,67 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Solicitud #{{ solicitud.id }}{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'lista_solicitudes' %}">Mis Solicitudes</a></li>
+        <li class="breadcrumb-item active">Detalle #{{ solicitud.id }}</li>
+    </ol>
+</nav>
+
+<div class="d-flex justify-content-between align-items-start mb-4">
+    <h2>📋 Solicitud #{{ solicitud.id }}</h2>
+    {% if solicitud.estado == 'pendiente' %}
+        <span class="badge bg-warning text-dark fs-6">⏳ Pendiente</span>
+    {% elif solicitud.estado == 'en_proceso' %}
+        <span class="badge bg-info text-dark fs-6">🔄 En Proceso</span>
+    {% elif solicitud.estado == 'resuelta' %}
+        <span class="badge bg-success fs-6">✅ Resuelta</span>
+    {% else %}
+        <span class="badge bg-danger fs-6">❌ Rechazada</span>
+    {% endif %}
+</div>
+
+<div class="card">
+    <div class="card-header bg-light">
+        <h5 class="mb-0">{{ solicitud.titulo }}</h5>
+    </div>
+    <div class="card-body">
+        <p class="card-text">{{ solicitud.descripcion }}</p>
+    </div>
+    <div class="card-footer text-muted small">
+        <div class="row">
+            <div class="col-md-6">
+                <strong>📅 Creada:</strong> {{ solicitud.fecha_creacion|date:"d/m/Y H:i" }}
+            </div>
+            <div class="col-md-6 text-md-end">
+                <strong>🔄 Actualizada:</strong> {{ solicitud.fecha_actualizacion|date:"d/m/Y H:i" }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Timeline de estados (visual) -->
+<div class="mt-4">
+    <h6>Estado actual del proceso:</h6>
+    <div class="progress" style="height: 25px;">
+        {% if solicitud.estado == 'pendiente' %}
+            <div class="progress-bar bg-warning" role="progressbar" style="width: 25%">Pendiente</div>
+        {% elif solicitud.estado == 'en_proceso' %}
+            <div class="progress-bar bg-info" role="progressbar" style="width: 50%">En Proceso</div>
+        {% elif solicitud.estado == 'resuelta' %}
+            <div class="progress-bar bg-success" role="progressbar" style="width: 100%">Resuelta</div>
+        {% else %}
+            <div class="progress-bar bg-danger" role="progressbar" style="width: 100%">Rechazada</div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="mt-4">
+    <a href="{% url 'lista_solicitudes' %}" class="btn btn-outline-secondary">
+        ← Volver a la lista
+    </a>
+</div>
+{% endblock %}

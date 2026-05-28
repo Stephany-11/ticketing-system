@@ -1,0 +1,77 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Mis Solicitudes{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>📋 Mis Solicitudes</h2>
+    <a href="{% url 'crear_solicitud' %}" class="btn btn-success">
+        + Nueva Solicitud
+    </a>
+</div>
+
+{% if solicitudes %}
+    <!-- Filtros rápidos -->
+    <div class="mb-3">
+        <span class="text-muted small">Filtrar por estado:</span>
+        <a href="?estado=" class="badge bg-secondary text-decoration-none">Todos</a>
+        <a href="?estado=pendiente" class="badge bg-warning text-dark text-decoration-none">Pendientes</a>
+        <a href="?estado=en_proceso" class="badge bg-info text-dark text-decoration-none">En Proceso</a>
+        <a href="?estado=resuelta" class="badge bg-success text-decoration-none">Resueltas</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for solicitud in solicitudes %}
+                <tr>
+                    <td><strong>#{{ solicitud.id }}</strong></td>
+                    <td>{{ solicitud.titulo|truncatechars:40 }}</td>
+                    <td>
+                        {% if solicitud.estado == 'pendiente' %}
+                            <span class="badge bg-warning text-dark">⏳ Pendiente</span>
+                        {% elif solicitud.estado == 'en_proceso' %}
+                            <span class="badge bg-info text-dark">🔄 En Proceso</span>
+                        {% elif solicitud.estado == 'resuelta' %}
+                            <span class="badge bg-success">✅ Resuelta</span>
+                        {% else %}
+                            <span class="badge bg-danger">❌ Rechazada</span>
+                        {% endif %}
+                    </td>
+                    <td class="small text-muted">
+                        {{ solicitud.fecha_creacion|date:"d/m/Y" }}
+                    </td>
+                    <td>
+                        <a href="{% url 'detalle_solicitud' solicitud.id %}" 
+                           class="btn btn-sm btn-outline-primary">Ver</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Contador -->
+    <div class="text-muted small mt-2">
+        Total: {{ solicitudes.count }} solicitud{{ solicitudes.count|pluralize }}
+    </div>
+    
+{% else %}
+    <div class="alert alert-info text-center">
+        <h5>📭 No tienes solicitudes registradas</h5>
+        <p class="mb-3">Crea tu primera solicitud para comenzar</p>
+        <a href="{% url 'crear_solicitud' %}" class="btn btn-primary">
+            + Crear Primera Solicitud
+        </a>
+    </div>
+{% endif %}
+{% endblock %}

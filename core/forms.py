@@ -5,7 +5,7 @@ from .models import Solicitud
 class SolicitudForm(forms.ModelForm):
     class Meta:
         model = Solicitud
-        fields = ['Titulo','Descripcion']
+        fields = ['titulo','descripcion']
         widgets = {
             'titulo': forms.TextInput(attrs={
                 'class': 'form-control', 

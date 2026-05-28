@@ -25,11 +25,18 @@ SECRET_KEY = 'django-insecure-#6@=o%enz!2vegncm6!to(w8_a@=3=_)e@dmi0j#u3)cuai14b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Antes:
 ALLOWED_HOSTS = []
 
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '.ngrok.io',
+    '.ngrok-free.app',
+    '.ngrok-free.dev',  # ← AGREGA ESTA LÍNEA
+]
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',
+    'core',  # ← Tu app
 ]
 
 MIDDLEWARE = [
@@ -48,7 +55,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'core.middleware.NgrokSkipWarningMiddleware',  # ← COMENTADO TEMPORALMENTE
 ]
+
 
 ROOT_URLCONF = 'gestion_solicitudes.urls'
 
@@ -126,3 +135,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'lista_solicitudes'
 LOGOUT_REDIRECT_URL = 'home'
+
+# Configurar header para saltar advertencia de ngrok
+NGROK_SKIP_BROWSER_WARNING = True
+
+# Configuración para ngrok
+CSRF_TRUSTED_ORIGINS = [
+    'https://crusader-anew-propeller.ngrok-free.dev',
+    'https://*.ngrok-free.app',
+    'https://*.ngrok-free.dev',
+    'https://*.ngrok.io',
+]
+
+# Configuración de cookies seguras para HTTPS
+SESSION_COOKIE_SECURE = False  # Cambiar a True en producción
+CSRF_COOKIE_SECURE = False  # Cambiar a True en producción

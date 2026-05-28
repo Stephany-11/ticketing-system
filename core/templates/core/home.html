@@ -1,0 +1,64 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Inicio - Sistema de Solicitudes{% endblock %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h1 class="display-5 fw-bold">📋 Sistema de Gestión de Solicitudes</h1>
+    <p class="lead text-muted mt-3">Escuela de Artillería Militar de Bogotá</p>
+    <p class="mb-4">Plataforma para el registro y seguimiento de requerimientos internos</p>
+    
+    {% if user.is_authenticated %}
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="{% url 'crear_solicitud' %}" class="btn btn-primary btn-lg px-4 gap-3">
+                📝 Crear Nueva Solicitud
+            </a>
+            <a href="{% url 'lista_solicitudes' %}" class="btn btn-outline-secondary btn-lg px-4">
+                📋 Ver Mis Solicitudes
+            </a>
+        </div>
+        <div class="mt-4 p-3 bg-light rounded">
+            <small class="text-muted">
+                👤 Conectado como: <strong>{{ user.username }}</strong>
+            </small>
+        </div>
+    {% else %}
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="{% url 'login' %}" class="btn btn-primary btn-lg px-4 gap-3">
+                🔐 Iniciar Sesión
+            </a>
+        </div>
+        <div class="mt-4 alert alert-info d-inline-block">
+            <small>Debes iniciar sesión para crear o consultar solicitudes</small>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Sección informativa -->
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h3 class="card-title">🚀 Rápido</h3>
+                <p class="card-text">Crea solicitudes en menos de 1 minuto con nuestro formulario simplificado.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h3 class="card-title">🔍 Transparente</h3>
+                <p class="card-text">Seguimiento en tiempo real del estado de cada requerimiento.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h3 class="card-title">🔒 Seguro</h3>
+                <p class="card-text">Tus datos están protegidos con estándares de seguridad militar.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
